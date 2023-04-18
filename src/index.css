@@ -186,3 +186,22 @@ body {
   padding: 5px 10px;
   border-radius: 5px;
 }
+
+.status-safe {
+  background-color: green;
+}
+.status-unsafe {
+  background-color: red;
+}
+.status-advisory {
+  background-color: yellow;
+}
+.status-inactive {
+  background-color: grey;
+}
+
+.inactive {
+  background-color: grey;
+}
+
+

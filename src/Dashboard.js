@@ -23,23 +23,41 @@ function Dashboard() {
     alert(`You selected ${supply}`);
   };
   
+
+  function getStatusText(turbidityValue) {
+    if (turbidityValue < 0.3) {
+      return "Safe";
+    } else if (turbidityValue < 0.5) {
+      return "Advisory";
+    } else {
+      return "Unsafe";
+    }
+  }
+  
+  
+  
   return (
     <div className="container">
       <div className="sidebar">
         <h2>Water Supplies</h2>
         <ul>
-          <li onClick={() => handleSupplyClick("Supply 1")}>Supply 1</li>
-          <li onClick={() => handleSupplyClick("Supply 2")}>Supply 2</li>
-          <li onClick={() => handleSupplyClick("Supply 3")}>Supply 3</li>
-          <li onClick={() => handleSupplyClick("Supply 4")}>Supply 4</li>
-          <li onClick={() => handleSupplyClick("Supply 5")}>Supply 5</li>
-          <li onClick={() => handleSupplyClick("Supply 6")}>Supply 6</li>
-          <li onClick={() => handleSupplyClick("Supply 7")}>Supply 7</li>
-          <li onClick={() => handleSupplyClick("Supply 8")}>Supply 8</li>
-          <li onClick={() => handleSupplyClick("Supply 9")}>Supply 9</li>
-          <li onClick={() => handleSupplyClick("Supply 10")}>Supply 10</li>
           
-        </ul>
+      <li>Supply 1:
+        <span className={`status-${getStatusText(turbidityValue).toLowerCase()}`}>
+            {getStatusText(turbidityValue)}
+        </span>
+      </li>
+  <li>Supply 2:   <span class="red">Inactive</span></li>
+  <li>Supply 3:   <span class="inactive">Inactive</span></li>
+  <li>Supply 4:   <span class="inactive">Inactive</span></li>
+  <li>Supply 5:   <span class="inactive">Inactive</span></li>
+  <li>Supply 6:   <span class="inactive">Inactive</span></li>
+  <li>Supply 7:   <span class="inactive">Inactive</span></li>
+  <li>Supply 8:   <span class="inactive">Inactive</span></li>
+  <li>Supply 9:   <span class="inactive">Inactive</span></li>
+  <li>Supply 10:  <span class="inactive">Inactive</span></li>
+</ul>
+
       </div>
       <div className="main">
         <h1 className="title">WaterSafe</h1>
