@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./index.css";
 import GaugeChart from 'react-gauge-chart';
 
+
+
 function Dashboard() {
   const [selectedSupply, setSelectedSupply] = useState(null);
   const [turbidityValue, setTurbidityValue] = useState(0.86);
@@ -33,6 +35,9 @@ function Dashboard() {
       return "Unsafe";
     }
   }
+ 
+
+  
   
   
   
@@ -40,8 +45,8 @@ function Dashboard() {
     <div className="container">
       <div className="sidebar">
         <h2>Water Supplies</h2>
-        <ul>
-          
+        
+        <ul>          
       <li>Supply 1:
         <span className={`status-${getStatusText(turbidityValue).toLowerCase()}`}>
             {getStatusText(turbidityValue)}
@@ -75,7 +80,13 @@ function Dashboard() {
 
         <div className="border"></div>
         
-        <p>Map goes here</p>
+        <p>
+
+
+
+
+
+        </p>
       </div>
       <div className="bottom-border">
         <div style={{ display: 'flex', justifyContent: 'center' }}>
