@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "arcgis-js-api": "^4.26.5",
     "esri-loader": "^3.7.0",
+    "firebase": "^9.20.0",
     "google-map-react": "^2.2.0",
     "ionicons": "^7.1.0",
     "leaflet": "^1.9.3",
