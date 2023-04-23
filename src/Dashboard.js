@@ -72,8 +72,8 @@ function Dashboard() {
 
     const [sups, setSups] = useState([])
 
-    function handleSetCurrent(item){
-            setCurrent(sups[0]);
+    function handleSetCurrent(index){
+            setCurrent(sups[index]);
     }
 
     function initListener(){
@@ -90,19 +90,34 @@ const unsubscribe = onSnapshot(q, (querySnapshot) => {
 
     function GuageContainer(props){
     let item = props.item;
+    let waterQuality = item.turbidity;
+    let turbidity = 100-waterQuality;
+    let ecoli=0;
+
+    if(waterQuality>85){
+        ecoli =0;
+    }
+    else{
+
+        let random_value = Math.floor(Math.random() * 10);
+        if (random_value%2==0){
+            random_value = -random_value;
+        }
+       ecoli = (1/2)*turbidity+ random_value;
+    }
     return (
         <div className="gauge-container" >
     <div className="gauge-wrapper" style={{ width: '300px', height: '300px' }}>
       <h3>Turbidity</h3>
-      <GaugeChart id="gauge-chart1" nrOfLevels={30} percent={1-item.turbidity/100} style={{ width: '400%', height: '100%' }} />
+      <GaugeChart id="gauge-chart1" nrOfLevels={30} percent={turbidity/100} style={{ width: '400%', height: '100%' }} />
     </div>
     <div className="gauge-wrapper" style={{ width: '300px', height: '300px' }}>
       <h3>E coli</h3>
-      <GaugeChart id="gauge-chart2" nrOfLevels={30} percent={1-item.turbidity/100} style={{ width: '400%', height: '100%' }} />
+      <GaugeChart id="gauge-chart2" nrOfLevels={30} percent={ecoli/100} style={{ width: '400%', height: '100%' }} />
     </div>
     <div className="gauge-wrapper" style={{ width: '300px', height: '300px' }}>
       <h3>Water Quality</h3>
-      <GaugeChart id="gauge-chart3" nrOfLevels={30} percent={item.turbidity/100} style={{ width: '400%', height: '100%' }} colors={[ "#FF0000","#00ff00"]} />
+      <GaugeChart id="gauge-chart3" nrOfLevels={30} percent={waterQuality/100} style={{ width: '400%', height: '100%' }} colors={[ "#FF0000","#00ff00"]} />
     </div>
 
 </div>
@@ -110,10 +125,10 @@ const unsubscribe = onSnapshot(q, (querySnapshot) => {
 }
 
 useEffect(()=>{
-    // getSuppliers().then((value)=>{
-    //     setSups(value)
-    // });
-    initListener()
+    getSuppliers().then((value)=>{
+        setSups(value)
+    });
+    // initListener()
 },[])
 
 function Supplier(props){
@@ -150,8 +165,8 @@ function Supplier(props){
   
   
   return (
-    <div className="container">
-      <div className="sidebar">
+    <div className="container-fluid p-0 m-0 d-flex">
+      <div className="sidebar container-fluid w-25%">
         <h2>Water Supplies</h2>
         <ul>
 
@@ -159,8 +174,8 @@ function Supplier(props){
 </ul>
 
       </div>
-      <div className="main">
-        <h1 className="title">WaterSafe</h1>
+      <div className="container-fluid p-0 m-0">
+        <h1 className="title">{current.name}</h1>
         <div className="status-labels" style={{ display: "flex", justifyContent: "center" }}>
   <div className="status-label">
     <span className="green-label">Safe: n</span>
@@ -174,11 +189,25 @@ function Supplier(props){
 </div>
 
         <div className="border"></div>
+
+          <div className={'container-fluid m-0 p-0 h-100'}>
+              <iframe
+          id="myMap"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9378.13630336011!2d28.097337280458493!3d-26.102802956570933!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e950d539f33d86d%3A0xba9789de8bd1fbb3!2sAlexandra%2C%202014!5e0!3m2!1sen!2sza!4v1682169831343!5m2!1sen!2sza"
+          title="Google Maps"
+          width="100%"
+          height="47%"
+          allowFullScreen=""
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+>       </iframe>
+
+          </div>
         
-        <p>Map goes here</p>
-      </div>
+
+      </div >
       <div className="bottom-border">
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div className={'container-fluid m-0 p-0 h-25'}>
 
             <GuageContainer  item = {current}/>
 
